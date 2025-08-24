@@ -1,19 +1,27 @@
-def bubble_sort_optimized(arr):
+def BubbleSort(arr):
     n = len(arr)
-    swaps = 0
     passes = 0
+    swaps = 0
+    
     for p in range(n - 1):
         swapped = False
-        for s in range(0, n - 1 - p):
+        for s in range(n - 1 - p):
             if arr[s] > arr[s + 1]:
                 arr[s], arr[s + 1] = arr[s + 1], arr[s]
-                swaps += 1
                 swapped = True
+                swaps += 1
         passes += 1
-        if not swapped:  # already sorted; stop early (best case O(n))
-            break
-    return arr, passes, swaps
+        
+        if not swapped:
+            print("List sorted!")
+            break;
 
-nums = [7, 6, 2, 4, 6, 7, 1, 8, 9]
-sorted_nums, passes, swaps = bubble_sort_optimized(nums)
-print(sorted_nums, f"(passes={passes}, swaps={swaps})")
+    return passes, swaps, arr
+
+myArr = [6,7,3,1,2,9,8,7,0,3]
+
+numPasses, numSwaps, sortedArray = BubbleSort(myArr)
+
+print("Array sorted in: " + str(numPasses), "passes, and", + numSwaps, "swaps.")
+print(myArr)
+            
