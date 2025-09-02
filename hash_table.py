@@ -1,16 +1,17 @@
-candidate_words = {}
+# table with 10 buckets
+my_list = [[] for _ in range(10)]
 
-def UniqueFirstCharacter(value):
-    for word in value:
-        if candidate_words.get(word, 0):
-            candidate_words.pop(word)
-        else:
-            candidate_words[word] = True
-        
-        if candidate_words != {}:
-            return list(candidate_words.keys())[0] 
-        else:
-            return "Nothing"
-Unique = UniqueFirstCharacter("9239")
+def hash_function(name: str) -> int:
+    # simple hash: sum of code points, then mod bucket count
+    return sum(ord(c) for c in name) % len(my_list)
 
-print(Unique) # Debug
+def storeInHash(name: str) -> None:
+    idx = hash_function(name)
+    bucket = my_list[idx]
+    if name not in bucket:          # optional: avoid duplicates
+        bucket.append(name)          # append INTO the bucket
+
+def isPresent(name: str) -> bool:
+    idx = hash_function(name)
+    bucket = my_list[idx]
+    return name in bucket            # check within the bucket
